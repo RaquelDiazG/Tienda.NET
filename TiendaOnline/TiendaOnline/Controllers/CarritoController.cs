@@ -23,7 +23,15 @@ namespace TiendaOnline.Controllers
             //Buscamos el producto
             Product p = db.Products.Find(id);
             //Añadimos el producto al carrito
-            cc.Add(p);
+            Product producto_encontrado = cc.FirstOrDefault(x => x.Id == id);
+            if (producto_encontrado!=null)
+            {
+                producto_encontrado.Cantidad++;
+            }
+            else {
+                p.Cantidad = 1;
+                cc.Add(p);
+            }
             //Redirigimos a la vista
             return RedirectToAction("Index", "Products");
         }
@@ -31,28 +39,17 @@ namespace TiendaOnline.Controllers
         public ActionResult DeleteProductCart(CarritoCompra cc, int id)
         {
             //Buscamos el producto
-            Product p = db.Products.Find(id);
-            //Añadimos el producto al carrito
-            cc.Remove(p);
+            Product p = cc.FirstOrDefault(x => x.Id == id);
+            //Eliminamos el producto del carrito
+            if (p.Cantidad!=1)
+            {
+                p.Cantidad--;
+            }
+            else {
+                cc.Remove(p);
+            }
             //Redirigimos a la vista
             return RedirectToAction("Index");
-        }
-
-        public ActionResult Buy(CarritoCompra cc)
-        {
-            //Crear pedido
-            Order pedido = new Order();
-            //Añadir productos del carrito a la BBDD de pedidos
-            foreach (Product p in cc)
-            {
-                pedido.Id = 0;
-                db.Orders.Add(pedido);
-                db.SaveChanges();
-            }
-            //Vaciar carrito
-            cc = new CarritoCompra();
-            //Volver
-            return RedirectToAction("Index", "Products");
         }
 
         public ActionResult Back()
