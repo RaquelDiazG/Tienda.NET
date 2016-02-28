@@ -12,6 +12,11 @@ namespace TiendaOnline.Controllers
 
         private tiendaOnlineEntities db = new tiendaOnlineEntities();
 
+        public ActionResult Index(CarritoCompra cc)
+        {
+            return View(cc);
+        }
+
         // GET: Carrito
         public ActionResult AddProductCart(CarritoCompra cc, int id)
         {
@@ -19,13 +24,18 @@ namespace TiendaOnline.Controllers
             Product p = db.Products.Find(id);
             //Añadimos el producto al carrito
             cc.Add(p);
-
+            //Redirigimos a la vista
             return RedirectToAction("Index", "Products");
         }
 
-        public ActionResult Index(CarritoCompra cc)
+        public ActionResult DeleteProductCart(CarritoCompra cc, int id)
         {
-            return View(cc);
+            //Buscamos el producto
+            Product p = db.Products.Find(id);
+            //Añadimos el producto al carrito
+            cc.Remove(p);
+            //Redirigimos a la vista
+            return RedirectToAction("Index");
         }
 
         public ActionResult Buy(CarritoCompra cc)
@@ -42,6 +52,11 @@ namespace TiendaOnline.Controllers
             //Vaciar carrito
             cc = new CarritoCompra();
             //Volver
+            return RedirectToAction("Index", "Products");
+        }
+
+        public ActionResult Back()
+        {
             return RedirectToAction("Index", "Products");
         }
     }

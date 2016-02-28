@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using TiendaOnline;
+using TiendaOnline.Models;
 
 namespace TiendaOnline.Controllers
 {
@@ -56,6 +57,29 @@ namespace TiendaOnline.Controllers
             }
 
             return View(order);
+        }
+
+        // GET: Orders/CreateWithProducts
+        public ActionResult CreateWithProducts(CarritoCompra cc)
+        {
+            //Crear pedido
+            Order pedido = new Order();
+            //Guardar pedido
+            db.Orders.Add(pedido);
+            db.SaveChanges();
+            //Añadir productos del carrito a la BBDD de pedidos
+            Order pedido_bd = db.Orders.Find(pedido.Id);
+            foreach (Product producto in cc)
+            {
+                Product product_bd = db.Products.Find(producto.Id);
+                pedido_bd.Products.Add(product_bd);
+            }
+            //Actualizar pedido
+            db.SaveChanges();
+            //Vaciar carrito
+            cc = new CarritoCompra();
+            //Volver
+            return RedirectToAction("Index", "Products");
         }
 
         // GET: Orders/Edit/5
