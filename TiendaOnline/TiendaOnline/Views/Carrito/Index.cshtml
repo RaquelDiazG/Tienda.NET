@@ -52,7 +52,7 @@
         float total = 0;
         foreach (var item in Model)
         {
-            total = total+ (float)item.Precio;
+            total = total+ (float)item.Precio * (int)item.Cantidad;
         }
     }
 <p>
