@@ -71,9 +71,23 @@ namespace TiendaOnline.Controllers
             Order pedido_bd = db.Orders.Find(pedido.Id);
             foreach (Product producto in cc)
             {
-                Product product_bd = db.Products.Find(producto.Id);
-                pedido_bd.Products.Add(product_bd);
+                Product producto_bd = db.Products.Find(producto.Id);
+                //Comprobar disponiblidad
+                if (producto_bd.Cantidad >= 1)
+                {
+                    pedido_bd.Products.Add(producto_bd);
+                    //Disminuir stock productos
+                    producto_bd.Cantidad--;
+                }
+                else
+                {
+                    //Vaciar carrito
+                    cc = new CarritoCompra();
+                    //Redirigir a la vista de error
+                    return RedirectToAction("ErrorBuy");
+                }
             }
+
             //Actualizar pedido
             db.SaveChanges();
             //Vaciar carrito
@@ -146,6 +160,11 @@ namespace TiendaOnline.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public ActionResult ErrorBuy()
+        {
+            return View();
         }
     }
 }
