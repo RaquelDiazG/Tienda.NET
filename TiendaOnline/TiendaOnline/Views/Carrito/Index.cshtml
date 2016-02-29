@@ -4,60 +4,89 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Mi carrito</h2>
-
-<p>
-    @Html.ActionLink("Volver", "Back")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Nombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Cantidad)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Precio)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Foto)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Cantidad)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Precio)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Foto)
-        </td>
-        <td>
-            @Html.ActionLink("Delete", "DeleteProductCart", new { id = item.Id })
-        </td>
-    </tr>
+<section id="cart_items">
+    <div class="container">
+        <div class="breadcrumbs">
+            <ol class="breadcrumb">
+                <li>@Html.ActionLink("Inicio", "Back")</li>
+                <li class="active">Carrito de la compra</li>
+            </ol>
+        </div>
+        <div class="table-responsive cart_info">
+            <table class="table table-condensed">
+                <thead>
+                    <tr class="cart_menu">
+                        <td class="image">@Html.DisplayNameFor(model => model.Foto)</td>
+                        <td class="description">@Html.DisplayNameFor(model => model.Nombre)</td>
+                        <td class="price">@Html.DisplayNameFor(model => model.Precio)</td>
+                        <td class="quantity">@Html.DisplayNameFor(model => model.Cantidad)</td>
+                        <td class="total">Total</td>
+                        <td></td>
+                    </tr>
+                </thead>
+                <tbody>
+@foreach (var item in Model){
+                    <tr>
+                        <td class="cart_product">
+                            <a href=""><img src="@Html.DisplayFor(modelItem => item.Foto)" alt=""></a>
+                        </td>
+                        <td class="cart_description">
+                            <h4><a href="">@Html.DisplayFor(modelItem => item.Nombre)</a></h4>
+                            <p></p>
+                        </td>
+                        <td class="cart_price">
+                            <p>@Html.DisplayFor(modelItem => item.Precio) €</p>
+                        </td>
+                        <td class="cart_quantity">
+                            <div class="cart_quantity_button">
+                                <a class="cart_quantity_up" href=""> + </a>
+                                <input class="cart_quantity_input" type="text" name="quantity" value="@Html.DisplayFor(modelItem => item.Cantidad)" autocomplete="off" size="2">
+                                <a class="cart_quantity_down" href=""> - </a>
+                            </div>
+                        </td>
+                        <td class="cart_total">
+                            <p class="cart_total_price">TOTAL1</p>
+                        </td>
+                        <td class="cart_delete">
+                            <a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
+                            @Html.ActionLink("Delete", "DeleteProductCart", new { id = item.Id })
+                        </td>
+                    </tr>
 }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section> <!--/#cart_items-->
 
-</table>
 
-    @{
-        float total = 0;
-        foreach (var item in Model)
-        {
-            total = total+ (float)item.Precio * (int)item.Cantidad;
-        }
-    }
-<p>
-    <strong>Total: </strong>@total €
-</p>
-
-@Html.ActionLink("Buy", "CreateWithProducts", "Orders")
-
+<section id="do_action">
+    <div class="container">
+        <!--<div class="heading">
+            <h3>What would you like to do next?</h3>
+            <p>Choose if you have a discount code or reward points you want to use or would like to estimate your delivery cost.</p>
+        </div>-->
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="total_area">
+                    <ul>
+                        @{
+                            float total = 0;
+                            foreach (var item in Model)
+                            {
+                                total = total + (float)item.Precio * (int)item.Cantidad;
+                            }
+                        }
+                        <li>Sub Total <span>@total €</span></li>
+                        <li>I.V.A. <span>$2</span></li>
+                        <li>Costes de envío <span>Gratis</span></li>
+                        
+                        <li>Total <span>@total €</span></li>
+                    </ul>
+                    <!--<a class="btn btn-default check_out" href="">Comprar</a>-->
+                    @Html.ActionLink("Buy", "CreateWithProducts", "Orders")
+                </div>
+            </div>
+        </div>
+    </div>
+</section><!--/#do_action-->
