@@ -225,6 +225,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Views\Carrito\Index - Copia.cshtml" />
     <Content Include="Views\Index\Index.cshtml" />
+    <Content Include="Views\Products\Index - Copia.cshtml" />
+    <Content Include="Views\Index\Contacto.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -240,8 +242,6 @@
     <Folder Include="Content\images\home\" />
     <Folder Include="Content\images\product-details\" />
     <Folder Include="Content\images\shop\" />
-    <Folder Include="Views\Home\" />
-    <Folder Include="Views\Plantilla\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
