@@ -161,6 +161,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CarritoController.cs" />
+    <Compile Include="Controllers\IndexController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Global.asax.cs">
@@ -223,6 +224,7 @@
     <Content Include="fonts\FontAwesome.otf" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Views\Carrito\Index - Copia.cshtml" />
+    <Content Include="Views\Index\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -238,6 +240,7 @@
     <Folder Include="Content\images\home\" />
     <Folder Include="Content\images\product-details\" />
     <Folder Include="Content\images\shop\" />
+    <Folder Include="Views\Home\" />
     <Folder Include="Views\Plantilla\" />
   </ItemGroup>
   <ItemGroup>
