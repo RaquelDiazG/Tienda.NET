@@ -52,9 +52,5 @@ namespace TiendaOnline.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult Back()
-        {
-            return RedirectToAction("Index", "Products");
-        }
     }
 }

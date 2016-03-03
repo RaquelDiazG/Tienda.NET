@@ -25,21 +25,17 @@
                     <div class="col-sm-4">
                         <div class="product-image-wrapper">
                             <div class="single-products">
-                                <div class="productinfo text-center">
+                                <a href="@Url.Action("Details", "Products", new { id = item.Id })">
+                                 <div class="productinfo text-center">
                                     <img src="@Html.DisplayFor(modelItem => item.Foto)" alt="" />
                                     <h2>@Html.DisplayFor(modelItem => item.Precio) €</h2>
                                     <p>@Html.DisplayFor(modelItem => item.Nombre)</p>
                                     <!--<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>-->
-                                    @Html.ActionLink("Añadir al carrito", "AddProductCart", "Carrito", new { id = item.Id }, null)
+
                                 </div>
-                                <!--<div class="product-overlay">
-                                    <div class="overlay-content">
-                                        <h2>$56</h2>
-                                        <p>Easy Polo Black Edition</p>
-                                        <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-                                    </div>
-                                </div>-->
-                            </div>
+                                    </a>
+  
+</div>
                             <!--<div class="choose">
                                 <ul class="nav nav-pills nav-justified">
                                     <li><a href=""><i class="fa fa-plus-square"></i>Add to wishlist</a></li>
@@ -48,7 +44,7 @@
                             </div>-->
                             <div class="choose">
                                 <ul class="nav nav-pills nav-justified">
-                                    <li>@Html.ActionLink("Details", "Details", new { id = item.Id })</li>
+                                    <li><a href="@Url.Action("AddProductCart", "Carrito", new { id = item.Id })" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Añadir al carrito</a></li>
                                 </ul>
                             </div>
                         </div>
