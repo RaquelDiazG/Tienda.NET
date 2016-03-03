@@ -8,6 +8,8 @@
         <EntityTypeShape EntityType="tiendaOnlineModel.Order" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
         <EntityTypeShape EntityType="tiendaOnlineModel.Product" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
         <AssociationConnector Association="tiendaOnlineModel.OrderProduct" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="tiendaOnlineModel.Category" Width="1.5" PointX="5.5" PointY="1.25" />
+        <AssociationConnector Association="tiendaOnlineModel.CategoryProduct" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

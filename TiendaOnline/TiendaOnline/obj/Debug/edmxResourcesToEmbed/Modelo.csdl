@@ -17,6 +17,7 @@
     <Property Name="Precio" Type="Double" />
     <Property Name="Foto" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="Orders" Relationship="Self.OrderProduct" FromRole="Products" ToRole="Orders" />
+    <NavigationProperty Name="Category" Relationship="tiendaOnlineModel.CategoryProduct" FromRole="Product" ToRole="Category" />
   </EntityType>
   <Association Name="OrderProduct">
     <End Role="Orders" Type="Self.Order" Multiplicity="*" />
@@ -29,5 +30,22 @@
       <End Role="Orders" EntitySet="Orders" />
       <End Role="Products" EntitySet="Products" />
     </AssociationSet>
+    <EntitySet Name="Categories" EntityType="tiendaOnlineModel.Category" />
+    <AssociationSet Name="CategoryProduct" Association="tiendaOnlineModel.CategoryProduct">
+      <End Role="Category" EntitySet="Categories" />
+      <End Role="Product" EntitySet="Products" />
+    </AssociationSet>
   </EntityContainer>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" FixedLength="false" MaxLength="100" Unicode="false" />
+    <NavigationProperty Name="Products" Relationship="tiendaOnlineModel.CategoryProduct" FromRole="Category" ToRole="Product" />
+  </EntityType>
+  <Association Name="CategoryProduct">
+    <End Type="tiendaOnlineModel.Category" Role="Category" Multiplicity="1" />
+    <End Type="tiendaOnlineModel.Product" Role="Product" Multiplicity="*" />
+  </Association>
 </Schema>
