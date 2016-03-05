@@ -1,36 +1,45 @@
 ﻿@model IEnumerable<TiendaOnline.Category>
 
 @{
-    Layout = null;
+    ViewBag.Title = "Actions";
 }
 
-<div class="left-sidebar">
 
-    <div class="brands_products">
-        <!--brands_products-->
-        <h2>CATEGORÍAS</h2>
-        <div class="brands-name">
-            <ul class="nav nav-pills nav-stacked">
-                @foreach (var item in Model)
-                {
-                    <li><a href=""> <span class="pull-right">(@Html.DisplayFor(modelItem => item.Products.Count))</span>@Html.DisplayFor(modelItem => item.Nombre)</a></li>
-                }
-            </ul>
+<section id="cart_items">
+    <div class="container">
+
+        <div>
+            @Html.ActionLink("Categorías", "Index")
         </div>
-    </div><!--/brands_products-->
 
-    <div class="price-range">
-        <!--price-range-->
-        <h2>PRECIO</h2>
-        <div class="well">
-            <input type="text" class="span2" value="" data-slider-min="0" data-slider-max="600" data-slider-step="5" data-slider-value="[250,450]" id="sl2"><br />
-            <b>$ 0</b> <b class="pull-right">$ 600</b>
+        <a href="@Url.Action("Create", "Categories", null)" class="btn btn-primary">Crear nueva</a>
+        
+        <br />
+        <br />
+
+        <div class="table-responsive cart_info">
+            <table class="table table-condensed">
+                <thead>
+                    <tr class="cart_menu">
+                        <td>Nombre</td>
+                        <td>Acciones</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Nombre)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Editar", "Edit", new { id = item.Id }) | 
+                                @Html.ActionLink("Borrar", "Delete", new { id = item.Id })
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
         </div>
-    </div><!--/price-range-->
-
-    <div class="shipping text-center">
-        <!--shipping-->
-        <img src="images/home/shipping.jpg" alt="" />
-    </div><!--/shipping-->
-
-</div>
+    </div>
+</section> <!--/#categories_items-->

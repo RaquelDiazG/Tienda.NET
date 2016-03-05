@@ -20,6 +20,12 @@ namespace TiendaOnline.Controllers
             return View(db.Categories.ToList());
         }
 
+        // GET: Categories
+        public ActionResult Partial()
+        {
+            return View(db.Categories.ToList());
+        }
+
         // GET: Categories/Details/5
         public ActionResult Details(int? id)
         {
