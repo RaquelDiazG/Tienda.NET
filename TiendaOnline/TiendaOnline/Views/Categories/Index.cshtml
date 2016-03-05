@@ -1,20 +1,20 @@
 ﻿@model IEnumerable<TiendaOnline.Category>
 
 @{
-    ViewBag.Title = "Index";
+    Layout = null;
 }
 
-<div class="left-sidebar"> 
+<div class="left-sidebar">
 
     <div class="brands_products">
         <!--brands_products-->
         <h2>CATEGORÍAS</h2>
         <div class="brands-name">
             <ul class="nav nav-pills nav-stacked">
-            @foreach (var item in Model)
-            {     
-                <li><a href=""> <span class="pull-right">(@Html.DisplayFor(modelItem => item.Products.Count))</span>@Html.DisplayFor(modelItem => item.Nombre)</a></li>
-            }
+                @foreach (var item in Model)
+                {
+                    <li><a href=""> <span class="pull-right">(@Html.DisplayFor(modelItem => item.Products.Count))</span>@Html.DisplayFor(modelItem => item.Nombre)</a></li>
+                }
             </ul>
         </div>
     </div><!--/brands_products-->
