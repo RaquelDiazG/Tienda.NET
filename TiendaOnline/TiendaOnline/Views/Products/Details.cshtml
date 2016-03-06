@@ -4,47 +4,53 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3">
+                @Html.Action("Partial", "Categories", null)
+            </div>
 
-<div>
-    <h4>Product</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Nombre)
-        </dt>
+            <div class="col-sm-9 padding-right">
+                <div class="product-details">
+                    <!--product-details-->
+                    <div class="col-sm-5">
+                        <div class="view-product">
+                            <img src="@Html.DisplayFor(model => model.Foto)" alt="" />
+                        </div>
+                    </div>
+                    <div class="col-sm-7">
+                        <div class="product-information">
+                            <!--/product-information-->
+                            <h2>@Html.DisplayFor(model => model.Nombre)</h2>
+                            <img src="~/Content/images/product-details/rating.png" alt="" />
+                            <p><strong>ID: </strong>@Html.DisplayFor(model => model.Id)</p>
+                            <span>
+                                <span>@Html.DisplayFor(model => model.Precio) €</span>
+                                @if (Model.Cantidad == 0)
+                                {
+                                    <button type="button" class="btn btn-fefault cart" disabled>
+                                        <i class="fa fa-shopping-cart"></i>
+                                        Agotado
+                                    </button>
+                                }
+                                else
+                                {
+                                    <a href="@Url.Action("AddProductCart", "Carrito",new { id=Model.Id})" class="btn btn-fefault cart">
+                                        <i class="fa fa-shopping-cart"></i>
+                                        Añadir al carrito
+                                    </a>
+                                }
+                               
+                            </span>
+                        <p><strong>Unidades disponibles: </strong>@Html.DisplayFor(model => model.Cantidad)</p>
+                            <p>DESCRIPCION</p>
+                            <a href=""><img src="~/Content/images/product-details/share.png" class="share img-responsive" alt="" /></a>
+                        </div><!--/product-information-->
+                    </div>
+                </div><!--/product-details-->
 
-        <dd>
-            @Html.DisplayFor(model => model.Nombre)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Cantidad)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Cantidad)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Precio)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Precio)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Foto)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Foto)
-        </dd>
-
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+            </div>
+        </div>
+    </div>
+</section>

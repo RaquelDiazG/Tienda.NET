@@ -44,18 +44,21 @@
                             </div>-->
                             <div class="choose">
                                 <ul class="nav nav-pills nav-justified">
-                                    <li><a href="@Url.Action("AddProductCart", "Carrito", new { id = item.Id })" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Añadir al carrito</a></li>
+                                    <li class="text-center ">
+                                        @if (item.Cantidad == 0)
+                                        {
+                                            <strong class="text-danger">No hay stock</strong>
+                                        }
+                                        else
+                                        {
+                                            <a href="@Url.Action("AddProductCart", "Carrito", new { id = item.Id })" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Añadir al carrito</a>
+                                        }
+                                    </li>
                                 </ul>
                             </div>
                         </div>
                     </div>
 }
-                    <!--<ul class="pagination">
-                        <li class="active"><a href="">1</a></li>
-                        <li><a href="">2</a></li>
-                        <li><a href="">3</a></li>
-                        <li><a href="">&raquo;</a></li>
-                    </ul>-->
                 </div><!--features_items-->
             </div>
         </div>

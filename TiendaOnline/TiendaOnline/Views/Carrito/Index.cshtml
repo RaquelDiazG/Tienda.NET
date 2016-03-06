@@ -72,13 +72,13 @@
                             }
                         }
                         <li>Sub Total <span>@total €</span></li>
-                        <li>I.V.A. <span>$2</span></li>
+                        <li>I.V.A. <span>21%</span></li>
                         <li>Costes de envío <span>Gratis</span></li>
                         
                         <li>Total <span>@total €</span></li>
                     </ul>
-                    <!--<a class="btn btn-default check_out" href="">Comprar</a>-->
-                    @Html.ActionLink("Buy", "CreateWithProducts", "Orders")
+                    
+                    <a class="btn btn-primary" href="@Url.Action("CreateWithProducts", "Orders")">Comprar</a>
                 </div>
             </div>
         </div>
