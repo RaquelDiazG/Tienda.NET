@@ -244,6 +244,9 @@
     <Content Include="Views\Categories\Create - Copia.cshtml" />
     <Content Include="Views\Categories\Delete - Copia.cshtml" />
     <Content Include="Views\Products\Details - Copia.cshtml" />
+    <Content Include="Views\Products\Admin.cshtml" />
+    <Content Include="Views\Products\Delete - Copia.cshtml" />
+    <Content Include="Views\Products\Edit - Copia.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

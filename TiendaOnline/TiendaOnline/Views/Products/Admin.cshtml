@@ -1,0 +1,45 @@
+﻿@model IEnumerable<TiendaOnline.Product>
+
+@{
+    ViewBag.Title = "Admin";
+}
+
+<section id="cart_items">
+    <div class="container">
+
+        <div>
+            @Html.ActionLink("Productos", "Admin")
+        </div>
+
+        <a href="@Url.Action("Create", "Products", null)" class="btn btn-primary">Crear nuevo</a>
+
+        <br />
+        <br />
+
+        <div class="table-responsive cart_info">
+            <table class="table table-condensed">
+                <thead>
+                    <tr class="cart_menu">
+                        <td>Nombre</td>
+                        <td>Acciones</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Nombre)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
+                                @Html.ActionLink("Borrar", "Delete", new { id = item.Id })
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section> <!--/#categories_items-->
+
