@@ -47,4 +47,3 @@ C:\Users\raque\Documents\Visual Studio 2015\Projects\PRACTICA2\TiendaOnline\Tien
 C:\Users\raque\Documents\Visual Studio 2015\Projects\PRACTICA2\TiendaOnline\TiendaOnline\bin\System.Web.Mvc.xml
 C:\Users\raque\Documents\Visual Studio 2015\Projects\PRACTICA2\TiendaOnline\TiendaOnline\obj\Debug\TiendaOnline.dll
 C:\Users\raque\Documents\Visual Studio 2015\Projects\PRACTICA2\TiendaOnline\TiendaOnline\obj\Debug\TiendaOnline.pdb
-C:\Users\raque\Documents\Visual Studio 2015\Projects\PRACTICA2\TiendaOnline\TiendaOnline\obj\Debug\TiendaOnline.csprojResolveAssemblyReference.cache
