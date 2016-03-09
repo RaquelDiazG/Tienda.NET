@@ -21,6 +21,7 @@
                 <thead>
                     <tr class="cart_menu">
                         <td>Nombre</td>
+                        <td>Descripción</td>
                         <td>Acciones</td>
                     </tr>
                 </thead>
@@ -30,6 +31,9 @@
                         <tr>
                             <td>
                                 @Html.DisplayFor(modelItem => item.Nombre)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Descripcion)
                             </td>
                             <td>
                                 @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |

@@ -11,6 +11,7 @@
     <EntitySetMapping Name="Products">
       <EntityTypeMapping TypeName="IsTypeOf(tiendaOnlineModel.Product)">
         <MappingFragment StoreEntitySet="Products">
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Nombre" ColumnName="Nombre" />
           <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />

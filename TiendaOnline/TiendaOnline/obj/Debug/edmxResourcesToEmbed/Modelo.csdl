@@ -18,6 +18,7 @@
     <Property Name="Foto" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="Orders" Relationship="Self.OrderProduct" FromRole="Products" ToRole="Orders" />
     <NavigationProperty Name="Category" Relationship="tiendaOnlineModel.CategoryProduct" FromRole="Product" ToRole="Category" />
+    <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
   </EntityType>
   <Association Name="OrderProduct">
     <End Role="Orders" Type="Self.Order" Multiplicity="*" />

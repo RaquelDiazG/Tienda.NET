@@ -4,94 +4,95 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="tiendaOnlineModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-  <EntityContainer Name="tiendaOnlineModelStoreContainer">
-    <EntitySet Name="Orders" EntityType="tiendaOnlineModel.Store.Orders" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Products" EntityType="tiendaOnlineModel.Store.Products" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Categories" EntityType="tiendaOnlineModel.Store.Categories" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="OrderProduct" EntityType="tiendaOnlineModel.Store.OrderProduct" store:Type="Tables" Schema="dbo" />
-    <AssociationSet Name="FK_OrderProduct_Orders" Association="tiendaOnlineModel.Store.FK_OrderProduct_Orders">
-      <End Role="Orders" EntitySet="Orders" />
-      <End Role="OrderProduct" EntitySet="OrderProduct" />
-    </AssociationSet>
-    <AssociationSet Name="FK_OrderProduct_Products" Association="tiendaOnlineModel.Store.FK_OrderProduct_Products">
-      <End Role="Products" EntitySet="Products" />
-      <End Role="OrderProduct" EntitySet="OrderProduct" />
-    </AssociationSet>
-    <AssociationSet Name="CategoryProduct" Association="tiendaOnlineModel.Store.CategoryProduct">
-      <End Role="Category" EntitySet="Categories" />
-      <End Role="Product" EntitySet="Products" />
-    </AssociationSet>
-  </EntityContainer>
-  <EntityType Name="Orders">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-  </EntityType>
-  <EntityType Name="Products">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Nombre" Type="varchar" Nullable="true" MaxLength="100" />
-    <Property Name="Cantidad" Type="int" Nullable="true" />
-    <Property Name="Precio" Type="float" Nullable="true" />
-    <Property Name="Foto" Type="varchar" Nullable="true" MaxLength="100" />
-    <Property Name="Category_Id" Type="int" Nullable="false" />
-  </EntityType>
-  <EntityType Name="Categories">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Nombre" Type="varchar" Nullable="true" MaxLength="100" />
-  </EntityType>
-  <EntityType Name="OrderProduct">
-    <Key>
-      <PropertyRef Name="Orders_Id" />
-      <PropertyRef Name="Products_Id" />
-    </Key>
-    <Property Name="Orders_Id" Type="int" Nullable="false" />
-    <Property Name="Products_Id" Type="int" Nullable="false" />
-  </EntityType>
-  <Association Name="CategoryProduct">
-    <End Role="Category" Type="tiendaOnlineModel.Store.Categories" Multiplicity="1" />
-    <End Role="Product" Type="tiendaOnlineModel.Store.Products" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Category">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Product">
-        <PropertyRef Name="Category_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_OrderProduct_Orders">
-    <End Role="Orders" Type="tiendaOnlineModel.Store.Orders" Multiplicity="1" />
-    <End Role="OrderProduct" Type="tiendaOnlineModel.Store.OrderProduct" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Orders">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="OrderProduct">
-        <PropertyRef Name="Orders_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_OrderProduct_Products">
-    <End Role="OrderProduct" Type="tiendaOnlineModel.Store.OrderProduct" Multiplicity="*" />
-    <End Role="Products" Type="tiendaOnlineModel.Store.Products" Multiplicity="1" />
-    <ReferentialConstraint>
-      <Principal Role="Products">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="OrderProduct">
-        <PropertyRef Name="Products_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-</Schema></edmx:StorageModels>
+    <Schema Namespace="tiendaOnlineModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Categories">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="OrderProduct">
+          <Key>
+            <PropertyRef Name="Orders_Id" />
+            <PropertyRef Name="Products_Id" />
+          </Key>
+          <Property Name="Orders_Id" Type="int" Nullable="false" />
+          <Property Name="Products_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Products">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="100" />
+          <Property Name="Cantidad" Type="int" />
+          <Property Name="Precio" Type="float" />
+          <Property Name="Foto" Type="varchar" MaxLength="100" />
+          <Property Name="Category_Id" Type="int" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <Association Name="FK_CategoryProduct">
+          <End Role="Categories" Type="Self.Categories" Multiplicity="1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="Category_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderProduct_Orders">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
+          <End Role="OrderProduct" Type="Self.OrderProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderProduct">
+              <PropertyRef Name="Orders_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderProduct_Products">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="OrderProduct" Type="Self.OrderProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderProduct">
+              <PropertyRef Name="Products_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="tiendaOnlineModelStoreContainer">
+          <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderProduct" EntityType="Self.OrderProduct" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_CategoryProduct" Association="Self.FK_CategoryProduct">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderProduct_Orders" Association="Self.FK_OrderProduct_Orders">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="OrderProduct" EntitySet="OrderProduct" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderProduct_Products" Association="Self.FK_OrderProduct_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="OrderProduct" EntitySet="OrderProduct" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="tiendaOnlineModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -113,6 +114,7 @@
           <Property Name="Foto" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Orders" Relationship="Self.OrderProduct" FromRole="Products" ToRole="Orders" />
           <NavigationProperty Name="Category" Relationship="tiendaOnlineModel.CategoryProduct" FromRole="Product" ToRole="Category" />
+          <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="OrderProduct">
           <End Role="Orders" Type="Self.Order" Multiplicity="*" />
@@ -159,7 +161,8 @@
     <EntitySetMapping Name="Products">
       <EntityTypeMapping TypeName="IsTypeOf(tiendaOnlineModel.Product)">
         <MappingFragment StoreEntitySet="Products">
-          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Nombre" ColumnName="Nombre" />
           <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
           <ScalarProperty Name="Precio" ColumnName="Precio" />
