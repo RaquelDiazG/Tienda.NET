@@ -29,7 +29,6 @@ namespace TiendaOnline
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order> Orders { get; set; }
-        public virtual int Category_Id { get; set; } //añadido por mi
         public virtual Category Category { get; set; }
     }
 }

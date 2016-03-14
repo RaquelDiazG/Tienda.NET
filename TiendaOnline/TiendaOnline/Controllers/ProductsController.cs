@@ -44,7 +44,6 @@ namespace TiendaOnline.Controllers
         // GET: Products/Create
         public ActionResult Create()
         {
-            ViewBag.Category_Id = new SelectList(db.Categories, "Id", "Nombre");
             return View();
         }
 
@@ -53,7 +52,7 @@ namespace TiendaOnline.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Product product)
+        public ActionResult Create([Bind(Include = "Id,Nombre,Cantidad,Precio,Foto")] Product product)
         {
             if (ModelState.IsValid)
             {
@@ -85,7 +84,7 @@ namespace TiendaOnline.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Nombre,Cantidad,Precio,Foto,Descripcion")] Product product)
+        public ActionResult Edit([Bind(Include = "Id,Nombre,Cantidad,Precio,Foto")] Product product)
         {
             if (ModelState.IsValid)
             {
