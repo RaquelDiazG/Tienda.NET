@@ -17,13 +17,15 @@ namespace TiendaOnline.Controllers
         // GET: Products
         public ActionResult Index()
         {
-            return View(db.Products.ToList());
+            var products = db.Products.Include(p => p.Category);
+            return View(products.ToList());
         }
 
         // GET: Products
         public ActionResult Admin()
         {
-            return View(db.Products.ToList());
+            var products = db.Products.Include(p => p.Category);
+            return View(products.ToList());
         }
 
         // GET: Products/Details/5
@@ -44,6 +46,7 @@ namespace TiendaOnline.Controllers
         // GET: Products/Create
         public ActionResult Create()
         {
+            ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Nombre");
             return View();
         }
 
@@ -52,7 +55,7 @@ namespace TiendaOnline.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Nombre,Cantidad,Precio,Foto")] Product product)
+        public ActionResult Create([Bind(Include = "Id,Nombre,Cantidad,Precio,Foto,Descripcion,CategoryId")] Product product)
         {
             if (ModelState.IsValid)
             {
@@ -60,6 +63,8 @@ namespace TiendaOnline.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+
+            ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Nombre", product.CategoryId);
 
             return View(product);
         }
@@ -76,6 +81,7 @@ namespace TiendaOnline.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Nombre", product.CategoryId);
             return View(product);
         }
 
@@ -84,7 +90,7 @@ namespace TiendaOnline.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Nombre,Cantidad,Precio,Foto")] Product product)
+        public ActionResult Edit([Bind(Include = "Id,Nombre,Cantidad,Precio,Foto,Descripcion,CategoryId")] Product product)
         {
             if (ModelState.IsValid)
             {
@@ -92,6 +98,7 @@ namespace TiendaOnline.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Nombre", product.CategoryId);
             return View(product);
         }
 
