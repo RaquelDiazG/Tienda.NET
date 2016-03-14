@@ -11,12 +11,13 @@
     <EntitySetMapping Name="Products">
       <EntityTypeMapping TypeName="IsTypeOf(tiendaOnlineModel.Product)">
         <MappingFragment StoreEntitySet="Products">
-          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Nombre" ColumnName="Nombre" />
           <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
           <ScalarProperty Name="Precio" ColumnName="Precio" />
           <ScalarProperty Name="Foto" ColumnName="Foto" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -34,14 +35,6 @@
       </EndProperty>
       <EndProperty Name="Products">
         <ScalarProperty Name="Id" ColumnName="Products_Id" />
-      </EndProperty>
-    </AssociationSetMapping>
-    <AssociationSetMapping Name="CategoryProduct" TypeName="tiendaOnlineModel.CategoryProduct" StoreEntitySet="Products">
-      <EndProperty Name="Category">
-        <ScalarProperty Name="Id" ColumnName="Category_Id" />
-      </EndProperty>
-      <EndProperty Name="Product">
-        <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
     </AssociationSetMapping>
   </EntityContainerMapping>

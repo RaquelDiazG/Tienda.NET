@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 03/03/2016 20:12:57
--- Generated from EDMX file: C:\Users\raque\Documents\Visual Studio 2015\Projects\PRACTICA2\TiendaOnline\TiendaOnline\Modelo.edmx
+-- Date Created: 03/14/2016 13:51:24
+-- Generated from EDMX file: C:\Users\Raquel\Documents\Visual Studio 2015\Projects\PRACTICA2\TiendaOnline\TiendaOnline\Modelo.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -17,17 +17,23 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[FK_OrderProduct_Order]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[OrderProduct] DROP CONSTRAINT [FK_OrderProduct_Order];
+IF OBJECT_ID(N'[dbo].[FK_CategoryProduct]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Products] DROP CONSTRAINT [FK_CategoryProduct];
 GO
-IF OBJECT_ID(N'[dbo].[FK_OrderProduct_Product]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[OrderProduct] DROP CONSTRAINT [FK_OrderProduct_Product];
+IF OBJECT_ID(N'[dbo].[FK_OrderProduct_Orders]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[OrderProduct] DROP CONSTRAINT [FK_OrderProduct_Orders];
+GO
+IF OBJECT_ID(N'[dbo].[FK_OrderProduct_Products]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[OrderProduct] DROP CONSTRAINT [FK_OrderProduct_Products];
 GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
 -- --------------------------------------------------
 
+IF OBJECT_ID(N'[dbo].[Categories]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Categories];
+GO
 IF OBJECT_ID(N'[dbo].[OrderProduct]', 'U') IS NOT NULL
     DROP TABLE [dbo].[OrderProduct];
 GO
@@ -55,7 +61,8 @@ CREATE TABLE [dbo].[Products] (
     [Cantidad] int  NULL,
     [Precio] float  NULL,
     [Foto] varchar(100)  NULL,
-    [Category_Id] int  NOT NULL
+    [Descripcion] varchar(100)  NULL,
+    [CategoryId] int  NULL
 );
 GO
 
@@ -129,10 +136,10 @@ ON [dbo].[OrderProduct]
     ([Products_Id]);
 GO
 
--- Creating foreign key on [Category_Id] in table 'Products'
+-- Creating foreign key on [CategoryId] in table 'Products'
 ALTER TABLE [dbo].[Products]
 ADD CONSTRAINT [FK_CategoryProduct]
-    FOREIGN KEY ([Category_Id])
+    FOREIGN KEY ([CategoryId])
     REFERENCES [dbo].[Categories]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
@@ -141,7 +148,7 @@ GO
 -- Creating non-clustered index for FOREIGN KEY 'FK_CategoryProduct'
 CREATE INDEX [IX_FK_CategoryProduct]
 ON [dbo].[Products]
-    ([Category_Id]);
+    ([CategoryId]);
 GO
 
 -- --------------------------------------------------
