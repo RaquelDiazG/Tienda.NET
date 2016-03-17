@@ -136,5 +136,21 @@ namespace TiendaOnline.Controllers
             }
             base.Dispose(disposing);
         }
+
+        // GET: Products with filter
+        public ActionResult Search(int category_id)
+        {
+            var products = db.Products.Include(p => p.Category);
+            List<Product> list = new List<Product>();
+            foreach(var p in products)
+            {
+                if (p.Category.Id.Equals(category_id))
+                {
+                    list.Add(p);
+                }
+            }
+            return View("Index",list);
+        }
+
     }
 }
