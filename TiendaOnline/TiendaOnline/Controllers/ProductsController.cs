@@ -152,5 +152,16 @@ namespace TiendaOnline.Controllers
             return View("Index",list);
         }
 
+        // GET: Products with filter
+        public ActionResult SearchByWord(string word)
+        {
+            var products = db.Products.Include(p => p.Category);           
+
+            var results = from c in products
+                          where c.Nombre.Contains(word)
+                          select c;
+            return View("Index", results.ToList());
+        }
+
     }
 }

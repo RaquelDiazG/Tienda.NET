@@ -107,9 +107,13 @@
                     </div>
                     <div class="col-sm-3">
                         <div class="search_box pull-right">
-                            <input type="text" placeholder="Buscar..." />
+                            <form action="@Url.Action("SearchByWord", "Products")">
+                                <input type="text" name="word" placeholder="Buscar..." />
+                                <button class="btn btn-primary" type="submit" style="margin: 0;">Ir</button>
+                            </form>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div><!--/header-bottom-->
