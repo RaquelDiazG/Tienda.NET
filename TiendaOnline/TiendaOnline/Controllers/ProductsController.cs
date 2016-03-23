@@ -138,7 +138,7 @@ namespace TiendaOnline.Controllers
         }
 
         // GET: Products with filter
-        public ActionResult Search(int category_id)
+        public ActionResult SearchByCategory(int category_id)
         {
             var products = db.Products.Include(p => p.Category);
             List<Product> list = new List<Product>();
