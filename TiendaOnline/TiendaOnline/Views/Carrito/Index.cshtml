@@ -14,7 +14,6 @@
                         <td class="description">@Html.DisplayNameFor(model => model.Nombre)</td>
                         <td class="price">@Html.DisplayNameFor(model => model.Precio)</td>
                         <td class="quantity">@Html.DisplayNameFor(model => model.Cantidad)</td>
-                        <td class="total">Total</td>
                         <td></td>
                     </tr>
                 </thead>
@@ -33,9 +32,6 @@
                         </td>
                         <td>
                             <p>@Html.DisplayFor(modelItem => item.Cantidad)</p>
-                        </td>
-                        <td>
-                            <p class="cart_total_price">TOTAL1</p>
                         </td>
                         <td>
                             @Html.ActionLink("Eliminar", "DeleteProductCart", new { id = item.Id }, new { @class = "btn btn-primary" })
@@ -70,9 +66,9 @@
                         <li>I.V.A. <span>21%</span></li>
                         <li>Costes de envío <span>Gratis</span></li>
                         <li>Total <span>@total €</span></li>
-                    </ul>
-                    
-                    <a class="btn btn-primary" href="@Url.Action("CreateWithProducts", "Orders")">Comprar</a>
+
+                        <a class="btn btn-primary" href="@Url.Action("CreateWithProducts", "Orders")">Comprar</a>
+                    </ul>                    
                 </div>
             </div>
         </div>
