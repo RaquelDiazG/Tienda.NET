@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 03/14/2016 13:51:24
--- Generated from EDMX file: C:\Users\Raquel\Documents\Visual Studio 2015\Projects\PRACTICA2\TiendaOnline\TiendaOnline\Modelo.edmx
+-- Date Created: 04/10/2016 12:27:51
+-- Generated from EDMX file: C:\Users\raque\Documents\Visual Studio 2015\Projects\PRACTICA2\TiendaOnline\TiendaOnline\Modelo.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -20,28 +20,19 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_CategoryProduct]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Products] DROP CONSTRAINT [FK_CategoryProduct];
 GO
-IF OBJECT_ID(N'[dbo].[FK_OrderProduct_Orders]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[OrderProduct] DROP CONSTRAINT [FK_OrderProduct_Orders];
-GO
-IF OBJECT_ID(N'[dbo].[FK_OrderProduct_Products]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[OrderProduct] DROP CONSTRAINT [FK_OrderProduct_Products];
-GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[Categories]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Categories];
-GO
-IF OBJECT_ID(N'[dbo].[OrderProduct]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[OrderProduct];
-GO
 IF OBJECT_ID(N'[dbo].[Orders]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Orders];
 GO
 IF OBJECT_ID(N'[dbo].[Products]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Products];
+GO
+IF OBJECT_ID(N'[dbo].[Categories]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Categories];
 GO
 
 -- --------------------------------------------------
@@ -73,10 +64,12 @@ CREATE TABLE [dbo].[Categories] (
 );
 GO
 
--- Creating table 'OrderProduct'
-CREATE TABLE [dbo].[OrderProduct] (
-    [Orders_Id] int  NOT NULL,
-    [Products_Id] int  NOT NULL
+-- Creating table 'OrderDetails'
+CREATE TABLE [dbo].[OrderDetails] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [Cantidad] int  NOT NULL,
+    [Order_Id] int  NOT NULL,
+    [Product_Id] int  NOT NULL
 );
 GO
 
@@ -102,39 +95,15 @@ ADD CONSTRAINT [PK_Categories]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
--- Creating primary key on [Orders_Id], [Products_Id] in table 'OrderProduct'
-ALTER TABLE [dbo].[OrderProduct]
-ADD CONSTRAINT [PK_OrderProduct]
-    PRIMARY KEY CLUSTERED ([Orders_Id], [Products_Id] ASC);
+-- Creating primary key on [Id] in table 'OrderDetails'
+ALTER TABLE [dbo].[OrderDetails]
+ADD CONSTRAINT [PK_OrderDetails]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
 -- --------------------------------------------------
 -- Creating all FOREIGN KEY constraints
 -- --------------------------------------------------
-
--- Creating foreign key on [Orders_Id] in table 'OrderProduct'
-ALTER TABLE [dbo].[OrderProduct]
-ADD CONSTRAINT [FK_OrderProduct_Orders]
-    FOREIGN KEY ([Orders_Id])
-    REFERENCES [dbo].[Orders]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating foreign key on [Products_Id] in table 'OrderProduct'
-ALTER TABLE [dbo].[OrderProduct]
-ADD CONSTRAINT [FK_OrderProduct_Products]
-    FOREIGN KEY ([Products_Id])
-    REFERENCES [dbo].[Products]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_OrderProduct_Products'
-CREATE INDEX [IX_FK_OrderProduct_Products]
-ON [dbo].[OrderProduct]
-    ([Products_Id]);
-GO
 
 -- Creating foreign key on [CategoryId] in table 'Products'
 ALTER TABLE [dbo].[Products]
@@ -149,6 +118,36 @@ GO
 CREATE INDEX [IX_FK_CategoryProduct]
 ON [dbo].[Products]
     ([CategoryId]);
+GO
+
+-- Creating foreign key on [Order_Id] in table 'OrderDetails'
+ALTER TABLE [dbo].[OrderDetails]
+ADD CONSTRAINT [FK_OrderOrderDetails]
+    FOREIGN KEY ([Order_Id])
+    REFERENCES [dbo].[Orders]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_OrderOrderDetails'
+CREATE INDEX [IX_FK_OrderOrderDetails]
+ON [dbo].[OrderDetails]
+    ([Order_Id]);
+GO
+
+-- Creating foreign key on [Product_Id] in table 'OrderDetails'
+ALTER TABLE [dbo].[OrderDetails]
+ADD CONSTRAINT [FK_ProductOrderDetails]
+    FOREIGN KEY ([Product_Id])
+    REFERENCES [dbo].[Products]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_ProductOrderDetails'
+CREATE INDEX [IX_FK_ProductOrderDetails]
+ON [dbo].[OrderDetails]
+    ([Product_Id]);
 GO
 
 -- --------------------------------------------------

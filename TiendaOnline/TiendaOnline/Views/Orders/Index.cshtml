@@ -6,6 +6,13 @@
 
 <section id="cart_items">
     <div class="container">
+
+        <div>
+            @Html.ActionLink("Pedidos", "Index")
+        </div>
+
+        <br />
+
         <div class="table-responsive cart_info">
             <table class="table table-condensed">
                 <thead>
@@ -17,21 +24,25 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var item in Model){
+                    @foreach (var item in Model)
+                    {
                     <tr>
                         <td class="cart_product">
                             @Html.DisplayFor(modelItem => item.Id)
                         </td>
                         <td class="cart_description">
-                            <ul>
-                                @foreach (var item2 in item.Products)
-                                {
-                                    <li>@Html.DisplayFor(modelItem => item2.Cantidad) x @Html.DisplayFor(modelItem => item2.Nombre)</li>
+                            <ul style="padding-left: 0;">                                
+                                    @{ float total = 0;}
+                                    @foreach (var item2 in item.OrderDetails)
+                                    {
+                                        total = total + (int)item2.Cantidad * (float)item2.Product.Precio;
+
+                                    <li>@Html.DisplayFor(modelItem => item2.Cantidad) x @Html.DisplayFor(modelItem => item2.Product.Nombre) (@Html.DisplayFor(modelItem => item2.Product.Precio) €/unidad)</li>
                                 }
                             </ul>
                         </td>
                         <td class="cart_price">
-                            <p>€</p>
+                            <p>@total €</p>
                         </td>
                     </tr>
                     }

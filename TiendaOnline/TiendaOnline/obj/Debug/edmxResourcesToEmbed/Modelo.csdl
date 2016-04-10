@@ -5,37 +5,38 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <NavigationProperty Name="Products" Relationship="Self.OrderProduct" FromRole="Orders" ToRole="Products" />
+    <NavigationProperty Name="OrderDetails" Relationship="tiendaOnlineModel.OrderOrderDetails" FromRole="Order" ToRole="OrderDetails" />
   </EntityType>
   <EntityType Name="Product">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Name="Cantidad" Type="Int32" />
-    <Property Name="Precio" Type="Double" />
+    <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Cantidad" Type="Int32" Nullable="false" />
+    <Property Name="Precio" Type="Double" Nullable="false" />
     <Property Name="Foto" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="Orders" Relationship="Self.OrderProduct" FromRole="Products" ToRole="Orders" />
     <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="CategoryId" Type="Int32" Nullable="true" />
     <NavigationProperty Name="Category" Relationship="tiendaOnlineModel.CategoryProduct" FromRole="Product" ToRole="Category" />
+    <NavigationProperty Name="OrderDetails" Relationship="tiendaOnlineModel.ProductOrderDetails" FromRole="Product" ToRole="OrderDetails" />
   </EntityType>
-  <Association Name="OrderProduct">
-    <End Role="Orders" Type="Self.Order" Multiplicity="*" />
-    <End Role="Products" Type="Self.Product" Multiplicity="*" />
-  </Association>
   <EntityContainer Name="tiendaOnlineEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Orders" EntityType="Self.Order" />
     <EntitySet Name="Products" EntityType="Self.Product" />
-    <AssociationSet Name="OrderProduct" Association="Self.OrderProduct">
-      <End Role="Orders" EntitySet="Orders" />
-      <End Role="Products" EntitySet="Products" />
-    </AssociationSet>
     <EntitySet Name="Categories" EntityType="tiendaOnlineModel.Category" />
     <AssociationSet Name="CategoryProduct" Association="tiendaOnlineModel.CategoryProduct">
       <End Role="Category" EntitySet="Categories" />
       <End Role="Product" EntitySet="Products" />
+    </AssociationSet>
+    <EntitySet Name="OrderDetails" EntityType="tiendaOnlineModel.OrderDetails" />
+    <AssociationSet Name="OrderOrderDetails" Association="tiendaOnlineModel.OrderOrderDetails">
+      <End Role="Order" EntitySet="Orders" />
+      <End Role="OrderDetails" EntitySet="OrderDetails" />
+    </AssociationSet>
+    <AssociationSet Name="ProductOrderDetails" Association="tiendaOnlineModel.ProductOrderDetails">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="OrderDetails" EntitySet="OrderDetails" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Category">
@@ -57,5 +58,22 @@
         <PropertyRef Name="CategoryId" />
       </Dependent>
     </ReferentialConstraint>
+  </Association>
+  <EntityType Name="OrderDetails">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Cantidad" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Order" Relationship="tiendaOnlineModel.OrderOrderDetails" FromRole="OrderDetails" ToRole="Order" />
+    <NavigationProperty Name="Product" Relationship="tiendaOnlineModel.ProductOrderDetails" FromRole="OrderDetails" ToRole="Product" />
+  </EntityType>
+  <Association Name="OrderOrderDetails">
+    <End Type="tiendaOnlineModel.Order" Role="Order" Multiplicity="1" />
+    <End Type="tiendaOnlineModel.OrderDetails" Role="OrderDetails" Multiplicity="*" />
+  </Association>
+  <Association Name="ProductOrderDetails">
+    <End Type="tiendaOnlineModel.Product" Role="Product" Multiplicity="1" />
+    <End Type="tiendaOnlineModel.OrderDetails" Role="OrderDetails" Multiplicity="*" />
   </Association>
 </Schema>

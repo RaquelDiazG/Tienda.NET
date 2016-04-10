@@ -75,7 +75,11 @@ namespace TiendaOnline.Controllers
                 //Comprobar disponiblidad
                 if (producto_bd.Cantidad >= 1)
                 {
-                    pedido_bd.Products.Add(producto_bd);
+                    OrderDetails details = new OrderDetails();
+                    details.Order = pedido_bd;
+                    details.Product = producto_bd;
+                    details.Cantidad = producto.Cantidad;
+                    db.OrderDetails.Add(details);
                     //Disminuir stock productos
                     producto_bd.Cantidad--;
                 }
@@ -95,6 +99,7 @@ namespace TiendaOnline.Controllers
             //Volver
             return RedirectToAction("Index", "Products");
         }
+
 
         // GET: Orders/Edit/5
         public ActionResult Edit(int? id)

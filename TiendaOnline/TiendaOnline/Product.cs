@@ -17,19 +17,19 @@ namespace TiendaOnline
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Product()
         {
-            this.Orders = new HashSet<Order>();
+            this.OrderDetails = new HashSet<OrderDetails>();
         }
     
         public int Id { get; set; }
         public string Nombre { get; set; }
-        public Nullable<int> Cantidad { get; set; }
-        public Nullable<double> Precio { get; set; }
+        public int Cantidad { get; set; }
+        public double Precio { get; set; }
         public string Foto { get; set; }
         public string Descripcion { get; set; }
         public Nullable<int> CategoryId { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Order> Orders { get; set; }
         public virtual Category Category { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<OrderDetails> OrderDetails { get; set; }
     }
 }

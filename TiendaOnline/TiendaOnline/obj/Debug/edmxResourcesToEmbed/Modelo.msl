@@ -29,12 +29,28 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <AssociationSetMapping Name="OrderProduct" TypeName="tiendaOnlineModel.OrderProduct" StoreEntitySet="OrderProduct">
-      <EndProperty Name="Orders">
-        <ScalarProperty Name="Id" ColumnName="Orders_Id" />
+    <EntitySetMapping Name="OrderDetails">
+      <EntityTypeMapping TypeName="IsTypeOf(tiendaOnlineModel.OrderDetails)">
+        <MappingFragment StoreEntitySet="OrderDetails">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="OrderOrderDetails" TypeName="tiendaOnlineModel.OrderOrderDetails" StoreEntitySet="OrderDetails">
+      <EndProperty Name="Order">
+        <ScalarProperty Name="Id" ColumnName="Order_Id" />
       </EndProperty>
-      <EndProperty Name="Products">
-        <ScalarProperty Name="Id" ColumnName="Products_Id" />
+      <EndProperty Name="OrderDetails">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ProductOrderDetails" TypeName="tiendaOnlineModel.ProductOrderDetails" StoreEntitySet="OrderDetails">
+      <EndProperty Name="Product">
+        <ScalarProperty Name="Id" ColumnName="Product_Id" />
+      </EndProperty>
+      <EndProperty Name="OrderDetails">
+        <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
     </AssociationSetMapping>
   </EntityContainerMapping>
